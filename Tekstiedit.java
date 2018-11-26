@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,6 +15,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileSystemView;
 
 public class Tekstiedit extends JFrame {
 
@@ -73,13 +76,6 @@ public class Tekstiedit extends JFrame {
 		JMenu mnTiedosto = new JMenu("Tiedosto");
 		menuBar.add(mnTiedosto);
 		
-		JMenuItem mntmUusi = new JMenuItem("Uusi");
-		mntmUusi.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				editorPane.setText("");		
-				}
-			});
-		
 		String teksti = editorPane.getText(); // Siirt‰‰ tekstikent‰st‰ tekstin Stringin muotoon
 		
 		
@@ -89,11 +85,27 @@ public class Tekstiedit extends JFrame {
 				String line = ((AbstractButton) e.getSource()).getText(); // Alustaa line-muuttujan FileReaderia varten
 				try {
 					FileReader sis‰‰n = new FileReader("tiedosto.txt");
+
 					char[] buffer = new char[1024];
 					int n = sis‰‰n.read(buffer);
 					String lukija = new String(buffer, 0, n);
 					editorPane.setText(lukija);
 					sis‰‰n.close();
+					
+				/*	JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+					int returnValue = jfc.showOpenDialog(null);
+					// int returnValue = jfc.showSaveDialog(null);
+
+					if (returnValue == JFileChooser.APPROVE_OPTION) {
+						File selectedFile = jfc.getSelectedFile();
+						System.out.println(selectedFile.getAbsolutePath());
+					} */
+
+				
+
+			
+			
 				} catch (FileNotFoundException e1) {
 					System.out.println("Tiedostoa ei lˆytynyt!");
 					e1.printStackTrace();
@@ -102,8 +114,21 @@ public class Tekstiedit extends JFrame {
 				}	
 			}
 		});			
+		
+		
+		JMenuItem mntmUusi = new JMenuItem("Uusi");
+		mntmUusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Cleared!");
+				editorPane.setText("");		
+			}
+		});
+		mntmUusi.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+		mnTiedosto.add(mntmUusi);
+
 		mntmAvaa.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		mnTiedosto.add(mntmAvaa);
+		
 		
 		JMenuItem mntmTallenna = new JMenuItem("Tallenna");
 		mntmTallenna.addActionListener(new ActionListener() {
@@ -133,6 +158,8 @@ public class Tekstiedit extends JFrame {
 		JMenuItem mntmKorvaa = new JMenuItem("Poistu");
 		mntmKorvaa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Tekij‰n nimi: Nader \n"
+						+ "Github-repo: kissakalae/juomamaatti");
 			}
 		});
 		mnTiedosto.add(mntmPoistu);
@@ -140,9 +167,19 @@ public class Tekstiedit extends JFrame {
 		JMenu mnMuokkaa = new JMenu("Muokkaa");
 		menuBar.add(mnMuokkaa);
 		
+		JMenuItem mntmKorvaa_1 = new JMenuItem("Korvaa");
+		mnMuokkaa.add(mntmKorvaa_1);
+		
+		JMenuItem mntmTietoja = new JMenuItem("Tietoja");
+		mntmKorvaa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		menuBar.add(mntmTietoja);
+		
 		JButton btnUusi = new JButton("");
 		btnUusi.setIcon(new ImageIcon("C:\\Users\\Omistaja\\Documents\\GitHub\\Tekstieditori\\new.png"));
-		buttonGroup.add(btnUusi);
 		btnUusi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Cleared!");
@@ -155,7 +192,7 @@ public class Tekstiedit extends JFrame {
 		
 		JToolBar toolBar = new JToolBar();
 		contentPane.add(toolBar, BorderLayout.SOUTH);
-		btnUusi.setSelectedIcon(new ImageIcon("C:\\Users\\Omistaja\\Documents\\GitHub\\Tekstieditori\\new.png"));
+		btnUusi.setSelectedIcon(new ImageIcon(""));
 		toolBar.add(btnUusi);
 		
 		JButton btnTallenna = new JButton("");
@@ -173,7 +210,7 @@ public class Tekstiedit extends JFrame {
 				}
 			}
 		});
-		btnTallenna.setSelectedIcon(new ImageIcon("C:\\Users\\Omistaja\\Documents\\GitHub\\Tekstieditori\\save.jpg"));
+		btnTallenna.setSelectedIcon(new ImageIcon(""));
 		toolBar.add(btnTallenna);
 	}
 
