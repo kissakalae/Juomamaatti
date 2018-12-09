@@ -113,11 +113,11 @@ public class Deitabeis {
 						String vuosi = textField_2.getText();
 	
 						try {
-							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7265178","sql7265178", "ZJlKDCDHjS");
+							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7269257","sql7269257", "XbbkKXviA6");
 							if (con == null) {
 								JOptionPane.showMessageDialog(null, "Yhteyttä ei voitu muodostaa. :(");
 							}
-							PreparedStatement ps = con.prepareStatement("INSERT INTO kirja (kirjan_nimi, tekijä, julkaisuvuosi) \n" +
+							PreparedStatement ps = con.prepareStatement("INSERT INTO kirja (kirjan_nimi, tekija, julkaisuvuosi) \n" +
 																"VALUES ('" + kirjanNimi + "', '" + tekija +"', '" + vuosi + "');");
 							ps.executeUpdate();
 							con.close();
@@ -138,11 +138,11 @@ public class Deitabeis {
 						String tekija = textField_1.getText();
 						
 						try {
-							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7265178","sql7265178", "ZJlKDCDHjS");
+							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7269257", "sql7269257", "XbbkKXviA6");
 							if (con == null) {
 								JOptionPane.showMessageDialog(null, "Yhteyttä ei voitu muodostaa. :(");
 							}
-							PreparedStatement ps = con.prepareStatement("DELETE FROM kirja WHERE kirjan_nimi = '" + kirjanNimi + "' AND tekijä = '" + tekija +"';");
+							PreparedStatement ps = con.prepareStatement("DELETE FROM kirja WHERE kirjan_nimi = '" + kirjanNimi + "' AND tekija = '" + tekija +"';");
 							ps.executeUpdate();
 							con.close();
 						} catch (Exception e1) {
@@ -164,7 +164,7 @@ public class Deitabeis {
 				btnHaeKaikki.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7265178","sql7265178", "ZJlKDCDHjS");
+							Connection con = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net/sql7269257","sql7269257", "XbbkKXviA6");
 							if (con == null) {
 								JOptionPane.showMessageDialog(null, "Yhteyttä ei voitu muodostaa. :(");
 							}
